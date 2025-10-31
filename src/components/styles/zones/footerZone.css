@@ -1,0 +1,65 @@
+.footer-zone {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 110px;
+  background: #111;
+  border-top: 4px solid #1f1f1f;
+  padding: 20px 24px;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.6);
+}
+
+.footer-shell { display: grid; grid-template-columns: repeat(3, minmax(120px, 1fr)); gap: 24px; width: 100%; max-width: 640px; }
+
+.footer-button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 12px;
+  border-radius: 12px;
+  border: 2px solid #2d2d2d;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  color: #080808;
+}
+
+.footer-button:focus-visible { outline: 3px solid rgba(255, 255, 255, 0.7); outline-offset: 4px; }
+.footer-button:disabled, .footer-button[aria-disabled='true'] { cursor: not-allowed; opacity: 0.5; box-shadow: none; transform: none; }
+
+.footer-button--reset { background: url('../../assets/imgsGood/uiComponents/resetButtonSkin.png') center/cover no-repeat, radial-gradient(circle, #f8f8f8 0%, #d9d9d9 70%); box-shadow: inset 0 -12px 18px rgba(0, 0, 0, 0.25); }
+.footer-button--back { background: url('../../assets/imgsGood/uiComponents/redButtonSkin.png') center/cover no-repeat, radial-gradient(circle, #ff3b30 0%, #b71c1c 70%); color: #fbeaea; box-shadow: inset 0 -12px 18px rgba(0, 0, 0, 0.35); }
+.footer-button--confirm { background: radial-gradient(circle, #3ddc84 0%, #0b8f3e 70%); color: #042810; box-shadow: inset 0 -12px 18px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(11, 143, 62, 0.4); }
+
+.footer-button:not(:disabled):hover, .footer-button:not(:disabled):active { transform: translateY(3px); box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.5); }
+
+.footer-modal-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.65); display: flex; justify-content: center; align-items: center; z-index: 10; }
+.footer-modal { background: #151515; border: 2px solid #2a2a2a; border-radius: 12px; padding: 24px; max-width: 360px; width: 90%; color: #f0f0f0; box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6); }
+.footer-modal h3 { margin: 0 0 12px; font-size: 1.3rem; }
+.footer-modal p { margin: 0 0 16px; font-size: 1rem; }
+.footer-modal-actions { display: flex; justify-content: flex-end; gap: 12px; }
+.footer-modal-button { padding: 10px 16px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(40, 40, 40, 0.9); color: #f8f8f8; cursor: pointer; font-family: 'Courier New', monospace; }
+.footer-modal-button:focus-visible { outline: 3px solid rgba(158, 224, 255, 0.8); outline-offset: 2px; }
+.footer-modal-button--confirm { background: #d8483d; border-color: #ff7b6f; color: #fff5f4; }
+.footer-modal-button--cancel { background: #3a3a3a; }
+
+.footer-loading { position: absolute; top: 12px; right: 16px; font-size: 0.85rem; color: rgba(240, 240, 240, 0.75); }
+.footer-error { position: absolute; bottom: 12px; right: 16px; padding: 8px 12px; background: rgba(120, 0, 0, 0.55); border: 1px solid rgba(255, 70, 70, 0.7); border-radius: 6px; font-size: 0.85rem; color: #ffd6d6; }
+
+@media (max-width: 768px) {
+  .footer-zone { padding: 16px; min-height: 100px; }
+  .footer-shell { gap: 16px; }
+}
+
+@media (max-width: 480px) {
+  .footer-shell { grid-template-columns: 1fr; gap: 12px; }
+}
+

@@ -1,0 +1,94 @@
+.screen-zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a url('../../assets/imgsGood/uiComponents/screenBg.png') center/cover no-repeat;
+  border: 4px solid #242424;
+  border-radius: 12px;
+  padding: 16px;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.6), 0 8px 20px rgba(0, 0, 0, 0.4);
+  color: #f0f0f0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.screen-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 3px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.screen-zone::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 40%,
+    rgba(159, 229, 255, 0.08) 70%,
+    rgba(79, 167, 255, 0.12) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.screen-frame {
+  position: relative; /* ensure content sits above effects */
+  z-index: 3;
+  flex: 1 1 auto;
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.95) 0%, rgba(8, 8, 8, 0.98) 100%);
+  border: 2px solid #111;
+  border-radius: 8px;
+  padding: 18px;
+  overflow: hidden;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.7);
+}
+
+.screen-heading { font-size: 1.5rem; margin: 0 0 12px; color: #9fe5ff; text-shadow: 0 0 6px rgba(79, 167, 255, 0.6); }
+.screen-instructions { margin: 0 0 16px; font-size: 0.9rem; color: rgba(240, 240, 240, 0.75); }
+.screen-options { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-direction: column; gap: 10px; }
+.screen-option { display: flex; gap: 12px; align-items: flex-start; background: rgba(28, 28, 28, 0.8); padding: 10px 12px; border-radius: 6px; border: 1px solid rgba(70, 70, 70, 0.6); }
+.screen-option-digit { font-weight: bold; color: #ffb347; text-shadow: 0 0 3px rgba(255, 140, 0, 0.8); }
+.screen-option-label { flex: 1 1 auto; color: #e2e2e2; }
+
+.screen-other { margin-top: 20px; padding: 16px; border-radius: 6px; background: rgba(20, 20, 20, 0.85); border: 1px dashed rgba(120, 120, 120, 0.6); }
+.screen-other-label { display: block; margin-bottom: 8px; font-size: 0.95rem; color: #f0f0f0; }
+.screen-other-input { width: 100%; padding: 10px 12px; border-radius: 4px; border: 1px solid rgba(80, 80, 80, 0.9); background: rgba(15, 15, 15, 0.95); color: #f8f8f8; font-family: inherit; font-size: 1rem; }
+.screen-other-input:focus { outline: 2px solid rgba(79, 167, 255, 0.6); outline-offset: 2px; }
+.screen-other-hint { margin-top: 8px; font-size: 0.85rem; color: rgba(220, 220, 220, 0.7); }
+
+.screen-loading, .screen-report { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 16px; }
+.screen-loading-message { font-size: 1.25rem; color: #9fe5ff; text-shadow: 0 0 8px rgba(79, 167, 255, 0.6); }
+.screen-loading-wait { font-size: 0.95rem; color: rgba(240, 240, 240, 0.75); }
+
+.screen-error { margin-top: 12px; padding: 12px 16px; border-radius: 6px; background: rgba(120, 0, 0, 0.55); border: 1px solid rgba(255, 70, 70, 0.7); text-align: left; }
+.screen-error-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; justify-content: center; }
+.screen-error-actions button { padding: 8px 16px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; background: rgba(40, 40, 40, 0.9); color: #f8f8f8; cursor: pointer; font-family: inherit; }
+.screen-error-actions button:hover, .screen-error-actions button:focus { outline: none; background: rgba(60, 60, 60, 0.95); }
+.screen-error-discovery { background: rgba(120, 60, 0, 0.9) !important; border-color: rgba(255, 140, 70, 0.7) !important; }
+.screen-error-discovery:hover, .screen-error-discovery:focus { background: rgba(160, 80, 0, 0.95) !important; box-shadow: 0 0 8px rgba(255, 140, 70, 0.6); }
+
+.screen-report-content { width: 100%; height: 100%; overflow-y: auto; padding: 12px; background: rgba(12, 12, 12, 0.85); border: 1px solid rgba(50, 50, 50, 0.7); border-radius: 6px; text-align: left; }
+.screen-report-content pre { margin: 0; white-space: pre-wrap; line-height: 1.5; color: #f5f5f5; }
+.screen-report-placeholder { margin: 0; color: rgba(220, 220, 220, 0.7); }
+
+@media (max-width: 768px) {
+  .screen-zone { padding: 12px; border-width: 3px; }
+  .screen-frame { padding: 12px; }
+  .screen-heading { font-size: 1.25rem; }
+}
+

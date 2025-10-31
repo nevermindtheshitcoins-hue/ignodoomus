@@ -1,0 +1,76 @@
+.keypad-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px;
+  background: #1a1a1a;
+  border-top: 2px solid #333;
+  position: relative;
+}
+
+.keypad-buttons { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; width: 100%; max-width: 560px; }
+
+.keypad-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  padding: 8px;
+  background: #2a2a2a url('../../assets/imgsGood/uiComponents/selectButtonSkin.png') center/cover no-repeat;
+  border: 2px solid #555;
+  border-radius: 4px;
+  color: #ccc;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.keypad-button:hover:not(:disabled) { background: #333 url('../../assets/imgsGood/uiComponents/selectButtonSkin.png') center/cover no-repeat; border-color: #777; transform: translateY(1px); box-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+.keypad-button.selected { background: #1a0a00 url('../../assets/imgsGood/uiComponents/selectButtonSkin.png') center/cover no-repeat; border-color: #ff8800; color: #ff8800; box-shadow: 0 0 16px rgba(255, 136, 0, 0.6), inset 0 0 12px rgba(255, 136, 0, 0.2), 0 2px 8px rgba(255, 94, 0, 0.4); }
+.keypad-button.disabled { background: #1a1a1a; border-color: #333; color: #444; cursor: not-allowed; opacity: 0.6; }
+
+.button-digit { font-size: 20px; font-weight: bold; line-height: 1; margin-bottom: 4px; text-shadow: 0 0 4px rgba(255, 179, 71, 0.4), 0 -1px 2px rgba(0, 0, 0, 0.8); filter: drop-shadow(0 2px 2px rgba(0,0,0,0.6)); }
+.button-label { font-size: 11px; text-align: center; line-height: 1.2; word-break: break-word; }
+
+/* Copied feedback toast and animation */
+.copied-feedback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ff8800;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  animation: fade-in-out 2s ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes fade-in-out {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .keypad-buttons { gap: 10px; }
+  .keypad-button { min-height: 70px; font-size: 12px; }
+  .button-digit { font-size: 18px; }
+  .button-label { font-size: 10px; }
+}
+
+@media (max-width: 480px) {
+  .keypad-zone { padding: 12px; }
+  .keypad-buttons { gap: 8px; }
+  .keypad-button { min-height: 60px; font-size: 11px; }
+  .button-digit { font-size: 16px; }
+  .button-label { font-size: 9px; }
+}
