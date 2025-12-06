@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DeVOTE Scenario Builder - Interactive governance assessment experience" />
+    <title>DeVOTE Scenario Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <style>
+      /* Critical CSS for instant load */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { 
+        background: #000; 
+        color: #f0f0f0; 
+        font-family: 'Courier New', Courier, monospace;
+        min-height: 100vh;
+      }
+      #root {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      /* Loading state */
+      .loading-state {
+        text-align: center;
+        color: #9fe5ff;
+        font-size: 1.2rem;
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="loading-state">Initializing DeVOTE Console...</div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

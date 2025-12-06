@@ -1,0 +1,41 @@
+# DeVOTE Scenario Builder - Preliminary Questions
+# These 3 questions drive the AI-generated follow-ups and final narrative
+
+qp1:
+  id: qp1
+  step: Qp1
+  question: "What best describes your role in governance decisions?"
+  instructions: "Select the option that most closely matches your position, or choose 'Other' to describe."
+  options:
+    - "Executive leadership (CEO, COO, Board)"
+    - "VP or Director of Operations"
+    - "Compliance or Legal Officer"
+    - "Technology or IT Leadership"
+    - "Innovation or Strategy Consultant"
+    - "Partnership or Business Development Lead"
+
+qp2:
+  id: qp2
+  step: Qp2
+  question: "Which industry or sector are you focused on?"
+  instructions: "Select the industry that best matches your organization's primary domain."
+  options:
+    - "Financial Services & Banking"
+    - "Healthcare & Life Sciences"
+    - "Government & Public Sector"
+    - "Energy & Utilities"
+    - "Supply Chain & Logistics"
+    - "Technology & Digital Platforms"
+
+qp3:
+  id: qp3
+  step: Qp3
+  question: "What is your primary pain point with current governance processes?"
+  instructions: "Identify the challenge that most urgently needs addressing in your organization."
+  options:
+    - "Lack of verifiable audit trails for decisions"
+    - "Slow and costly compliance reporting"
+    - "Trust gaps between stakeholders"
+    - "Identity verification challenges"
+    - "Difficulty proving regulatory compliance"
+    - "Manual reconciliation and data integrity issues"
