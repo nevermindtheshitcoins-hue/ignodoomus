@@ -605,6 +605,10 @@ body {
 
 /* Responsive design */
 @media (max-width: 768px) {
+  body {
+    overflow: auto;
+  }
+  
   .machine-container {
     width: 95vw;
     height: 95vw;

@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "DeVOTE Scenario Builder",
   description: "Interactive assessment tool that generates personalized governance narratives for DeVOTE's verifiable governance platform",
+  viewport: "width=device-width, initial-scale=1.0",
 };
 
 export default function RootLayout({
