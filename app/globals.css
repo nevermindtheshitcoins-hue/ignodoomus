@@ -621,6 +621,13 @@ body {
   .question {
     font-size: 1.2rem;
   }
+}
+
+@media (max-width: 420px) {
+  body {
+    transform: scale(0.82);
+    transform-origin: top center;
+  }
   
   .option-button {
     padding: 0.8rem;
