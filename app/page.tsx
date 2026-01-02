@@ -383,7 +383,11 @@ export default function Home() {
         ))}
 
         {/* Screen area hitbox */}
-        <div className="hitbox hb-screen">
+        <div
+          className={`hitbox hb-screen ${
+            step === "REPORT" ? "is-report" : "is-questions"
+          }`}
+        >
           {screenMessage && (
             <div className="status-message">{screenMessage}</div>
           )}
