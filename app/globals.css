@@ -619,22 +619,22 @@ body {
   }
   
   .question {
-    font-size: 3.5vw !important;
+    font-size: 2.5vw !important;
   }
   
   .option-button {
-    font-size: 3vw !important;
-    padding: 2vw !important;
-  }
-  
-  .control-button {
-    font-size: 3vw !important;
+    font-size: 2vw !important;
     padding: 1.5vw !important;
   }
   
+  .control-button {
+    font-size: 2vw !important;
+    padding: 1vw !important;
+  }
+  
   .hb-screen .options .option-button {
-    font-size: 3vw !important;
-    padding: 2vw !important;
+    font-size: 2vw !important;
+    padding: 1.5vw !important;
   }
 }
 
@@ -645,21 +645,21 @@ body {
   }
   
   .question {
-    font-size: 4vw !important;
+    font-size: 3vw !important;
   }
   
   .option-button {
-    font-size: 3.5vw !important;
-    padding: 2.5vw !important;
-  }
-  
-  .control-button {
-    font-size: 3.5vw !important;
+    font-size: 2.5vw !important;
     padding: 2vw !important;
   }
   
+  .control-button {
+    font-size: 2.5vw !important;
+    padding: 1.5vw !important;
+  }
+  
   .hb-screen .options .option-button {
-    font-size: 3.5vw !important;
-    padding: 2.5vw !important;
+    font-size: 2.5vw !important;
+    padding: 2vw !important;
   }
 }
