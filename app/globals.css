@@ -1,0 +1,624 @@
+/* Clean slate CSS for photobooth interface */
+
+/* Basic reset and setup */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Nixie tube filament effect styles */
+@keyframes nixieFilamentGlow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 8px rgba(255, 174, 61, 1),
+      0 0 16px rgba(255, 174, 61, 0.9),
+      0 0 24px rgba(255, 174, 61, 0.8),
+      0 0 32px rgba(255, 174, 61, 0.6),
+      0 0 40px rgba(255, 174, 61, 0.4),
+      0 0 2px rgba(255, 200, 100, 0.8),
+      0 0 4px rgba(255, 200, 100, 0.6);
+  }
+  50% { 
+    text-shadow: 
+      0 0 12px rgba(255, 174, 61, 1),
+      0 0 24px rgba(255, 174, 61, 0.95),
+      0 0 36px rgba(255, 174, 61, 0.85),
+      0 0 48px rgba(255, 174, 61, 0.7),
+      0 0 60px rgba(255, 174, 61, 0.5),
+      0 0 3px rgba(255, 200, 100, 0.9),
+      0 0 6px rgba(255, 200, 100, 0.7);
+  }
+}
+
+@keyframes nixieFilamentFlicker {
+  0%, 100% { opacity: 1; }
+  20% { opacity: 0.95; }
+  40% { opacity: 1; }
+  60% { opacity: 0.92; }
+  80% { opacity: 1; }
+}
+
+@keyframes nixieFilamentBuzz {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-0.3px, 0.2px); }
+  50% { transform: translate(0.3px, -0.2px); }
+  75% { transform: translate(-0.2px, -0.3px); }
+}
+
+/* Enhanced nixie tube effects */
+@keyframes nixieFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes nixieBuzz {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-0.5px, 0.3px); }
+  50% { transform: translate(0.5px, -0.3px); }
+  75% { transform: translate(-0.3px, -0.5px); }
+}
+
+@keyframes nixieGlow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 12px rgba(255, 174, 61, 1),
+      0 0 24px rgba(255, 174, 61, 0.9),
+      0 0 36px rgba(255, 174, 61, 0.8),
+      0 0 48px rgba(255, 174, 61, 0.6),
+      0 0 60px rgba(255, 174, 61, 0.4);
+  }
+  50% { 
+    text-shadow: 
+      0 0 16px rgba(255, 174, 61, 1),
+      0 0 32px rgba(255, 174, 61, 0.95),
+      0 0 48px rgba(255, 174, 61, 0.85),
+      0 0 64px rgba(255, 174, 61, 0.7),
+      0 0 80px rgba(255, 174, 61, 0.5);
+  }
+}
+
+/* Main app container */
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Machine container with background image */
+.machine-container {
+  position: relative;
+  width: min(118vw, 118vh);  /* keep +20% scale */
+  height: min(118vw, 118vh);
+  background: url("/assets/uiConsoleShell.png") center/contain no-repeat;
+  background-color: #000;
+}
+
+/* Hitbox base styles */
+.hitbox {
+  position: absolute;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  
+  /* Debug outlines ON for alignment; comment out to hide 
+  outline: 2px solid rgba(0, 255, 0, 0.35); */
+}
+
+/* Nixie bulb hitboxes */
+.hb-nixie-1 { left: 18%; top: 10%; width: 8.14%; height: 20%; }
+.hb-nixie-2 { left: 27%; top: 10%; width: 8.14%; height: 20%; }
+.hb-nixie-3 { left: 36%; top: 10%; width: 8.14%; height: 20%; }
+.hb-nixie-4 { left: 45%; top: 10%; width: 8.14%; height: 20%; }
+.hb-nixie-5 { left: 54%; top: 10%; width: 8.14%; height: 20%; }
+.hb-nixie-6 { left: 63%; top: 10%; width: 8.14%; height: 20%; }
+.hb-nixie-7 { left: 72%; top: 10%; width: 8.14%; height: 20%; }
+.hb-nixie-8 { left: 81%; top: 10%; width: 8.14%; height: 20%; }
+
+/* Keypad button hitboxes (right-side pills) - anchored and responsive */
+.hb-key-1 { left: 81%; top: 28%; width: 12%; height: 3%; border-radius: 18px; }
+.hb-key-2 { left: 81%; top: 34%; width: 12%; height: 3%; border-radius: 18px; }
+.hb-key-3 { left: 81%; top: 40%; width: 12%; height: 3%; border-radius: 18px; }
+.hb-key-4 { left: 81%; top: 45%; width: 12%; height: 3%; border-radius: 18px; }
+.hb-key-5 { left: 81%; top: 52%; width: 12%; height: 3%; border-radius: 18px; }
+.hb-key-6 { left: 81%; top: 58%; width: 12%; height: 3%; border-radius: 18px; }
+.hb-key-7 { left: 81%; top: 63%; width: 12%; height: 3%; border-radius: 18px; }
+
+/* Footer button hitboxes */
+.hb-reset   { left: 27%; top: 74%; width: 9.5%; height: 9%; border-radius: 999px; }
+.hb-back    { left: 46%; top: 73%; width: 16%; height: 9.5%; border-radius: 12px; }
+.hb-confirm { left: 69.5%; top: 74%; width: 16%; height: 9%; border-radius: 12px; }
+
+/* Screen area hitbox (for displaying content) */
+.hb-screen {
+  left: 15%;
+  top: 28%;  /* Moved down 1% from 27% */
+  width: 66%;
+  height: 39%;  /* Increased by 1% from 38% */
+  background: rgba(11, 16, 24, 0.9);
+  border-radius: 8px;
+  padding: 0.8%;  /* Reduced from 1% */
+  overflow-y: auto;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  cursor: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 0.5%;  /* Reduced top padding to raise content */
+  
+  /* Text styling for questions and options */
+  font-family: 'courier new', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.1rem;  /* Increased from 1.0rem */
+  line-height: 1.2;  /* Increased from 1.1 */
+  color: #fff;
+}
+
+/* Question text styling */
+.hb-screen .question {
+  font-size: 1.3rem;  /* Increased from 1.1rem */
+  font-weight: 600;
+  margin-top: 0;  /* Removed top margin to raise content */
+  margin-bottom: 0.4rem;  /* Reduced from 0.6rem */
+  color: #fff;
+  line-height: 1.3;  /* Increased from 1.2 */
+}
+
+/* Option text styling */
+.hb-screen .options .option-button {
+  font-size: 1.1rem;  /* Increased from 0.9rem */
+  font-weight: 500;
+  padding: 0.3rem;  /* Reduced from 0.4rem */
+  line-height: 1.3;  /* Increased from 1.2 */
+}
+
+.hb-screen .options .option-number {
+  font-size: 1.2rem;  /* Increased from 1.0rem */
+  font-weight: 700;
+  min-width: 0.9rem;  /* Reduced from 1.0rem */
+}
+
+.hb-screen .options .option-text {
+  font-size: 1.1rem;  /* Increased from 0.9rem */
+  font-weight: 400;
+}
+
+/* Nixie tube hitbox styles with filament effect */
+.hitbox.hb-nixie-1,
+.hitbox.hb-nixie-2,
+.hitbox.hb-nixie-3,
+.hitbox.hb-nixie-4,
+.hitbox.hb-nixie-5,
+.hitbox.hb-nixie-6,
+.hitbox.hb-nixie-7,
+.hitbox.hb-nixie-8 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7.7rem;
+  font-weight: 100;
+  color: #444;
+  cursor: default;
+  font-family: 'Courier New', monospace;
+  letter-spacing: -0.05em;
+  text-shadow: 0 0 2px rgba(68, 68, 68, 0.3);
+  margin-top: -2%; /* Move numerals higher without transform conflicts */
+}
+
+.hitbox.hb-nixie-1.lit,
+.hitbox.hb-nixie-2.lit,
+.hitbox.hb-nixie-3.lit,
+.hitbox.hb-nixie-4.lit,
+.hitbox.hb-nixie-5.lit,
+.hitbox.hb-nixie-6.lit,
+.hitbox.hb-nixie-7.lit,
+.hitbox.hb-nixie-8.lit {
+  color: #ffae3d;
+  font-weight: 100;
+  animation: 
+    nixieFilamentFlicker 3s infinite ease-in-out,
+    nixieFilamentBuzz 0.15s infinite ease-in-out,
+    nixieFilamentGlow 2s infinite ease-in-out alternate;
+  text-shadow: 
+    0 0 8px rgba(255, 174, 61, 1),
+    0 0 16px rgba(255, 174, 61, 0.9),
+    0 0 24px rgba(255, 174, 61, 0.8),
+    0 0 32px rgba(255, 174, 61, 0.6),
+    0 0 40px rgba(255, 174, 61, 0.4),
+    0 0 2px rgba(255, 200, 100, 0.8),
+    0 0 4px rgba(255, 200, 100, 0.6),
+    0 -1px 0 rgba(255, 200, 100, 0.3), /* trailing effect */
+    0 -2px 0 rgba(255, 174, 61, 0.2), /* extended trail */
+    0 -3px 0 rgba(255, 174, 61, 0.1); /* longest trail */
+  background: linear-gradient(180deg, 
+    rgba(255, 174, 61, 0.1) 0%, 
+    rgba(255, 174, 61, 0.8) 30%, 
+    rgba(255, 200, 100, 1) 50%, 
+    rgba(255, 174, 61, 0.8) 70%, 
+    rgba(255, 174, 61, 0.1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-text-stroke: 0.5px rgba(255, 174, 61, 0.6);
+  filter: drop-shadow(0 0 3px rgba(255, 174, 61, 0.8));
+}
+
+/* Subtle variation for each bulb to feel more organic */
+.hitbox.hb-nixie-1.lit { animation-delay: 0s, 0s, 0s; }
+.hitbox.hb-nixie-2.lit { animation-delay: 0.2s, 0.05s, 0.3s; }
+.hitbox.hb-nixie-3.lit { animation-delay: 0.4s, 0.1s, 0.6s; }
+.hitbox.hb-nixie-4.lit { animation-delay: 0.6s, 0.15s, 0.9s; }
+.hitbox.hb-nixie-5.lit { animation-delay: 0.8s, 0.02s, 1.2s; }
+.hitbox.hb-nixie-6.lit { animation-delay: 1s, 0.08s, 1.5s; }
+.hitbox.hb-nixie-7.lit { animation-delay: 1.2s, 0.12s, 1.8s; }
+.hitbox.hb-nixie-8.lit { animation-delay: 1.4s, 0.03s, 2.1s; }
+
+/* Keypad button styles */
+.hitbox.hb-key-1,
+.hitbox.hb-key-2,
+.hitbox.hb-key-3,
+.hitbox.hb-key-4,
+.hitbox.hb-key-5,
+.hitbox.hb-key-6,
+.hitbox.hb-key-7 {
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hitbox.hb-key-1:hover:not(:disabled),
+.hitbox.hb-key-2:hover:not(:disabled),
+.hitbox.hb-key-3:hover:not(:disabled),
+.hitbox.hb-key-4:hover:not(:disabled),
+.hitbox.hb-key-5:hover:not(:disabled),
+.hitbox.hb-key-6:hover:not(:disabled),
+.hitbox.hb-key-7:hover:not(:disabled) {
+  background: rgba(40, 40, 40, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.hitbox.hb-key-1.selected,
+.hitbox.hb-key-2.selected,
+.hitbox.hb-key-3.selected,
+.hitbox.hb-key-4.selected,
+.hitbox.hb-key-5.selected,
+.hitbox.hb-key-6.selected,
+.hitbox.hb-key-7.selected {
+  background: rgba(255, 174, 61, 0.3);
+  border-color: rgba(255, 174, 61, 0.5);
+  color: #ffd9a0;
+}
+
+.hitbox.hb-key-1.disabled,
+.hitbox.hb-key-2.disabled,
+.hitbox.hb-key-3.disabled,
+.hitbox.hb-key-4.disabled,
+.hitbox.hb-key-5.disabled,
+.hitbox.hb-key-6.disabled,
+.hitbox.hb-key-7.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Footer button styles */
+.hitbox.hb-reset {
+  background: #f3f4f6;
+  color: #1f2937;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hitbox.hb-back {
+  background: #dc2626;
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hitbox.hb-confirm {
+  background: #22c55e;
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hitbox.hb-reset:hover:not(:disabled),
+.hitbox.hb-back:hover:not(:disabled),
+.hitbox.hb-confirm:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hitbox.hb-reset:disabled,
+.hitbox.hb-back:disabled,
+.hitbox.hb-confirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;  /* Reduced from 1rem */
+  margin-top: 0.5rem;  /* Added small top margin */
+}
+
+.option-button {
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.option-button:hover:not(:disabled) {
+  background: rgba(40, 40, 40, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.option-button.selected {
+  background: rgba(255, 174, 61, 0.3);
+  border-color: rgba(255, 174, 61, 0.5);
+  color: #ffd9a0;
+}
+
+.option-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.option-number {
+  font-weight: bold;
+  min-width: 2rem;
+}
+
+.option-text {
+  flex: 1;
+  text-align: left;
+}
+
+/* Custom input for "Other" option */
+.custom-input {
+  margin-top: 1rem;
+  padding: 1rem 1rem 0 1rem;  /* Removed bottom padding */
+  background: rgba(20, 20, 20, 0.5);
+  border-radius: 8px;
+}
+
+.custom-input label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
+
+.custom-input input {
+  width: 100%;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.validation-error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Status and error messages */
+.status-message, .error-message {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.status-message {
+  background: rgba(74, 222, 128, 0.2);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: #4ade80;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+/* Report screen */
+.report {
+  text-align: center;
+}
+
+.report h1 {
+  margin-bottom: 1rem;
+}
+
+.hint {
+  color: #ccc;
+  margin-bottom: 1.5rem;
+}
+
+.typing-indicator {
+  color: #ffae3d;
+  font-weight: bold;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.report-text {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: left;
+  line-height: 1.6;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 174, 61, 0.3) transparent;
+}
+
+.report-text::-webkit-scrollbar {
+  width: 6px;
+}
+
+.report-text::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.report-text::-webkit-scrollbar-thumb {
+  background: rgba(255, 174, 61, 0.3);
+  border-radius: 3px;
+}
+
+.report-text::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 174, 61, 0.5);
+}
+
+/* Typewriter effect for report text */
+.typewriter-text {
+  overflow: hidden;
+  white-space: pre-wrap;
+  animation: typewriter 2s steps(50, end);
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Typewriter character by character effect */
+.typewriter-char {
+  opacity: 0;
+  animation: fadeInChar 0.05s ease-in forwards;
+}
+
+@keyframes fadeInChar {
+  to { opacity: 1; }
+}
+
+/* Keypad-button styles */
+.keypad-button {
+  aspect-ratio: 1;
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keypad-button:hover:not(:disabled) {
+  background: rgba(40, 40, 40, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.keypad-button.selected {
+  background: rgba(255, 174, 61, 0.3);
+  border-color: rgba(255, 174, 61, 0.5);
+  color: #ffd9a0;
+}
+
+.keypad-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Footer controls */
+.control-button {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.control-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.control-button.reset {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.control-button.back {
+  background: #dc2626;
+  color: #fff;
+}
+
+.control-button.confirm {
+  background: #22c55e;
+  color: #fff;
+}
+
+.control-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .machine-container {
+    width: 95vw;
+    height: 95vw;
+  }
+  
+  .main-content {
+    grid-template-columns: 1fr clamp(90px, 22%, 130px);
+  }
+  
+  .question {
+    font-size: 1.2rem;
+  }
+  
+  .option-button {
+    padding: 0.8rem;
+  }
+}
