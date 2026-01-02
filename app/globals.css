@@ -612,6 +612,8 @@ body {
   .machine-container {
     width: 95vw;
     height: 95vw;
+    transform: scale(0.75);
+    transform-origin: top center;
   }
   
   .main-content {
@@ -619,47 +621,47 @@ body {
   }
   
   .question {
-    font-size: 2.5vw !important;
+    font-size: inherit !important;
   }
   
   .option-button {
-    font-size: 1.5vw !important;
-    padding: 1vw !important;
+    font-size: inherit !important;
+    padding: inherit !important;
   }
   
   .control-button {
-    font-size: 2vw !important;
-    padding: 1vw !important;
+    font-size: inherit !important;
+    padding: inherit !important;
   }
   
   .hb-screen .options .option-button {
-    font-size: 1.5vw !important;
-    padding: 1vw !important;
+    font-size: inherit !important;
+    padding: inherit !important;
   }
 }
 
 @media (max-width: 420px) {
   body {
-    transform: scale(0.82);
+    transform: scale(0.7);
     transform-origin: top center;
   }
   
   .question {
-    font-size: 3vw !important;
+    font-size: inherit !important;
   }
   
   .option-button {
-    font-size: 2vw !important;
-    padding: 1.5vw !important;
+    font-size: inherit !important;
+    padding: inherit !important;
   }
   
   .control-button {
-    font-size: 2.5vw !important;
-    padding: 1.5vw !important;
+    font-size: inherit !important;
+    padding: inherit !important;
   }
   
   .hb-screen .options .option-button {
-    font-size: 2vw !important;
-    padding: 1.5vw !important;
+    font-size: inherit !important;
+    padding: inherit !important;
   }
 }
