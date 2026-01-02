@@ -648,7 +648,7 @@ body {
   }
   
   .machine-container {
-    transform: scale(0.95);
+    transform: scale(0.7);
     transform-origin: top center;
   }
 }
