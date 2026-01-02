@@ -619,7 +619,17 @@ body {
   }
   
   .question {
-    font-size: 1.2rem;
+    font-size: 3.5vw;
+  }
+  
+  .option-button {
+    font-size: 3vw;
+    padding: 2vw;
+  }
+  
+  .control-button {
+    font-size: 3vw;
+    padding: 1.5vw;
   }
 }
 
@@ -630,16 +640,16 @@ body {
   }
   
   .question {
-    font-size: 0.9rem;
+    font-size: 4vw;
   }
   
   .option-button {
-    padding: 0.6rem;
-    font-size: 0.8rem;
+    font-size: 3.5vw;
+    padding: 2.5vw;
   }
   
   .control-button {
-    font-size: 0.8rem;
-    padding: 0.5rem;
+    font-size: 3.5vw;
+    padding: 2vw;
   }
 }
