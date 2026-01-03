@@ -97,9 +97,11 @@ body {
 /* Machine container with background image */
 .machine-container {
   position: relative;
-  width: min(118vw, 118vh);  /* keep +20% scale */
-  height: min(118vw, 118vh);
-  background: url("/assets/uiConsoleShell.png") center/contain no-repeat;
+  width: min(94vw, calc(94vh * 0.87), 1024px);
+  max-height: 94vh;
+  aspect-ratio: 1 / 1.15;
+  height: auto;
+  background: url("/assets/uiConsoleShell.png") center/100% 100% no-repeat;
   background-color: #000;
 }
 
@@ -135,36 +137,49 @@ body {
 .hb-key-7 { left: 81%; top: 63%; width: 12%; height: 3%; border-radius: 18px; }
 
 /* Footer button hitboxes */
-.hb-reset   { left: 27%; top: 74%; width: 9.5%; height: 9%; border-radius: 999px; }
-.hb-back    { left: 46%; top: 73%; width: 16%; height: 9.5%; border-radius: 12px; }
-.hb-confirm { left: 69.5%; top: 74%; width: 16%; height: 9%; border-radius: 12px; }
+.hb-reset   { left: 27%; top: 74.5%; width: 9.5%; height: 8.5%; border-radius: 999px; }
+.hb-back    { left: 46%; top: 73.5%; width: 16%; height: 9%; border-radius: 12px; }
+.hb-confirm { left: 69.5%; top: 74.5%; width: 16%; height: 8.5%; border-radius: 12px; }
 
 /* Screen area hitbox (for displaying content) */
 .hb-screen {
   left: 15%;
-  top: 28%;  /* Moved down 1% from 27% */
+  top: 25.5%;
   width: 66%;
-  height: 39%;  /* Increased by 1% from 38% */
+  height: 41%;
   background: rgba(11, 16, 24, 0.9);
   border-radius: 8px;
-  padding: 0.8%;  /* Reduced from 1% */
+  padding: 0.5%;
   overflow-y: auto;
+  overflow-x: hidden;
   border: 2px solid rgba(255, 255, 255, 0.1);
   cursor: none;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 0.5%;  /* Reduced top padding to raise content */
+  padding-top: 0.2%;
+  box-sizing: border-box;
+
+  --screen-font: clamp(0.82rem, 2.05vmin, 1.04rem);
+  --question-font: clamp(0.98rem, 2.6vmin, 1.25rem);
+  --option-font: clamp(0.78rem, 2vmin, 1.02rem);
+  --option-number-font: clamp(0.85rem, 2.2vmin, 1.1rem);
+  --option-padding: clamp(0.14rem, 0.6vmin, 0.3rem);
+  --option-gap: clamp(0.2rem, 0.8vmin, 0.4rem);
   
   /* Text styling for questions and options */
   font-family: 'courier new', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 1.1rem;  /* Increased from 1.0rem */
-  line-height: 1.2;  /* Increased from 1.1 */
+  font-size: var(--screen-font);
+  line-height: 1.2;
   color: #fff;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 174, 61, 0.35) transparent;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .hb-screen.is-questions {
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .hb-screen.is-report {
@@ -173,31 +188,42 @@ body {
 
 /* Question text styling */
 .hb-screen .question {
-  font-size: 1.3rem;
+  font-size: var(--question-font);
   font-weight: 600;
   margin-top: 0;  /* Removed top margin to raise content */
-  margin-bottom: 0.4rem;  /* Reduced from 0.6rem */
+  margin-bottom: clamp(0.28rem, 0.8vmin, 0.5rem);
   color: #fff;
-  line-height: 1.3;  /* Increased from 1.2 */
+  line-height: 1.22;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* Option text styling */
 .hb-screen .options .option-button {
-  font-size: 1.1rem;
+  font-size: var(--option-font);
   font-weight: 500;
-  padding: 0.3rem;  /* Reduced from 0.4rem */
-  line-height: 1.3;  /* Increased from 1.2 */
+  padding: var(--option-padding);
+  line-height: 1.18;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .hb-screen .options .option-number {
-  font-size: 1.2rem;
+  font-size: var(--option-number-font);
   font-weight: 700;
-  min-width: 0.9rem;  /* Reduced from 1.0rem */
+  min-width: 0.75rem;
 }
 
 .hb-screen .options .option-text {
-  font-size: 1.1rem;
+  font-size: var(--option-font);
   font-weight: 400;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  flex: 1;
+  min-width: 0; /* Allows text to wrap properly */
 }
 
 /* Nixie tube hitbox styles with filament effect */
@@ -212,7 +238,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 7.7rem;
+  font-size: clamp(3.5rem, 8vw, 7.7rem);
   font-weight: 100;
   color: #444;
   cursor: default;
@@ -220,6 +246,8 @@ body {
   letter-spacing: -0.05em;
   text-shadow: 0 0 2px rgba(68, 68, 68, 0.3);
   margin-top: -2%; /* Move numerals higher without transform conflicts */
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .hitbox.hb-nixie-1.lit,
@@ -372,8 +400,8 @@ body {
 .options {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;  /* Reduced from 1rem */
-  margin-top: 0.5rem;  /* Added small top margin */
+  gap: var(--option-gap, 0.4rem);
+  margin-top: clamp(0.3rem, 1vmin, 0.5rem);
 }
 
 .option-button {
@@ -618,112 +646,122 @@ body {
   }
   
   .machine-container {
-    width: 95vw;
-    /* Stretch slightly taller on mobile to preserve hitbox legibility */
-    height: 112vw;
-    transform: scale(0.8);
-    transform-origin: top center;
+    width: min(96vw, calc(96vh * 0.87));
+    max-height: 96vh;
   }
   
-  /* Base mobile font sizes */
-  .question {
-    font-size: 1.1rem !important;
-    line-height: 1.2 !important;
-  }
-  
-  .option-button {
-    font-size: 0.9rem !important;
-    padding: 0.6rem !important;
-  }
-  
-  .control-button {
-    font-size: 0.85rem !important;
-    padding: 0.7rem !important;
-  }
-  
-  .hb-screen .options .option-button {
-    font-size: 0.9rem !important;
-    padding: 0.6rem !important;
+  /* Adjust Nixie bulb sizes for mobile */
+  .hitbox.hb-nixie-1,
+  .hitbox.hb-nixie-2,
+  .hitbox.hb-nixie-3,
+  .hitbox.hb-nixie-4,
+  .hitbox.hb-nixie-5,
+  .hitbox.hb-nixie-6,
+  .hitbox.hb-nixie-7,
+  .hitbox.hb-nixie-8 {
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
   }
   
   /* Adjust hitbox sizes for mobile */
   .hb-screen {
-    font-size: 0.9rem;
-    padding: 0.6%;
+    top: 24.8%;
+    height: 43%;
+    padding: 0.45%;
+    --screen-font: clamp(0.78rem, 2.05vmin, 0.98rem);
+    --question-font: clamp(0.9rem, 2.6vmin, 1.12rem);
+    --option-font: clamp(0.72rem, 2vmin, 0.94rem);
+    --option-number-font: clamp(0.78rem, 2.2vmin, 0.98rem);
+    --option-padding: clamp(0.12rem, 0.55vmin, 0.26rem);
+    --option-gap: clamp(0.18rem, 0.7vmin, 0.34rem);
+    overflow-x: hidden;
+    word-wrap: break-word;
+    hyphens: auto;
+    box-sizing: border-box;
   }
   
   .hb-screen .question {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
+    margin-bottom: clamp(0.24rem, 0.7vmin, 0.4rem);
   }
   
   .hb-screen .options .option-button {
-    font-size: 0.9rem;
-    padding: 0.4rem;
+    line-height: 1.16;
+  }
+
+  .hb-screen .options {
+    max-height: 82%;
+    overflow-y: auto;
   }
   
   .hb-screen .options .option-number {
-    font-size: 1rem;
-    min-width: 0.8rem;
+    min-width: 0.7rem;
   }
   
   .hb-screen .options .option-text {
-    font-size: 0.9rem;
+    font-size: var(--option-font);
+  }
+
+  .options {
+    gap: var(--option-gap, 0.34rem);
   }
 }
 
 @media (max-width: 420px) {
   .machine-container {
-    width: 98vw;
-    /* Extra height on small phones to keep zones legible */
-    height: 128vw;
-    transform: scale(0.72);
-    transform-origin: top center;
+    width: min(98vw, calc(98vh * 0.87));
+    max-height: 98vh;
   }
   
-  /* Smaller mobile font sizes */
-  .question {
-    font-size: 1rem !important;
-    line-height: 1.1 !important;
-  }
-  
-  .option-button {
-    font-size: 0.8rem !important;
-    padding: 0.5rem !important;
-  }
-  
-  .control-button {
-    font-size: 0.75rem !important;
-    padding: 0.6rem !important;
-  }
-  
-  .hb-screen .options .option-button {
-    font-size: 0.8rem !important;
-    padding: 0.5rem !important;
+  /* Further adjust Nixie bulb sizes for very small screens */
+  .hitbox.hb-nixie-1,
+  .hitbox.hb-nixie-2,
+  .hitbox.hb-nixie-3,
+  .hitbox.hb-nixie-4,
+  .hitbox.hb-nixie-5,
+  .hitbox.hb-nixie-6,
+  .hitbox.hb-nixie-7,
+  .hitbox.hb-nixie-8 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
   }
   
   /* Further adjust hitbox sizes for very small screens */
   .hb-screen {
-    font-size: 0.8rem;
-    padding: 0.5%;
+    top: 24%;
+    height: 44.5%;
+    padding: 0.4%;
+    --screen-font: clamp(0.74rem, 2.4vmin, 0.92rem);
+    --question-font: clamp(0.86rem, 2.7vmin, 1.02rem);
+    --option-font: clamp(0.68rem, 2.2vmin, 0.88rem);
+    --option-number-font: clamp(0.74rem, 2.4vmin, 0.9rem);
+    --option-padding: clamp(0.1rem, 0.5vmin, 0.22rem);
+    --option-gap: clamp(0.16rem, 0.6vmin, 0.3rem);
+    overflow-x: hidden;
+    word-wrap: break-word;
+    hyphens: auto;
+    box-sizing: border-box;
   }
   
   .hb-screen .question {
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: clamp(0.2rem, 0.8vmin, 0.32rem);
   }
   
   .hb-screen .options .option-button {
-    font-size: 0.8rem;
-    padding: 0.3rem;
+    line-height: 1.14;
+  }
+
+  .hb-screen .options {
+    max-height: 85%;
+    overflow-y: auto;
   }
   
   .hb-screen .options .option-number {
-    font-size: 0.9rem;
-    min-width: 0.7rem;
+    min-width: 0.65rem;
   }
   
   .hb-screen .options .option-text {
-    font-size: 0.8rem;
+    font-size: var(--option-font);
+  }
+
+  .options {
+    gap: var(--option-gap, 0.3rem);
   }
 }
